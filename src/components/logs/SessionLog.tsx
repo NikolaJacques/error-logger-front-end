@@ -28,12 +28,12 @@ export default function SessionLog(props:Props) {
     return (
         <Accordion sx={{width: '100%'}} expanded={props.expanded === `${props.index}`} onChange={props.changeHandler(`${props.index}`)}>
             <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`log${props.index}-content`}
-            id={`log${props.index}bh-header`}
-            sx={{display:'flex', }}
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`log${props.index}-content`}
+                id={`log${props.index}bh-header`}
+                sx={{display:'flex', textAlign: "center"}}
             >
-                <Typography sx={{ width: '33%' }}>{props.log.sessionId}</Typography>
+                <Typography sx={{ width: '33%' }}>session: {props.log.sessionId}</Typography>
                 <Typography sx={{ width: '33%'  }}>{props.log.timestamp}</Typography>
                 <Typography sx={{ width: '33%'  }}>total errors: {props.log.totalErrors}</Typography>
             </AccordionSummary>

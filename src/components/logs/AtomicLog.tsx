@@ -29,7 +29,7 @@ export default function AtomicLog(props:Props) {
             </AccordionSummary>
             <Divider></Divider>
             <AccordionDetails>
-                <Box sx={{display:{md:'flex'}, gap:"0.5rem"}}>
+                <Box sx={{display:{md:'flex'}, gap:"0.5rem", py:"1rem"}}>
                     <Typography sx={{width:"50%"}}>browser: {props.log.browserVersion}</Typography>
                     <Typography sx={{width:"50%"}}>session: {props.log.sessionId}</Typography>
                 </Box>
