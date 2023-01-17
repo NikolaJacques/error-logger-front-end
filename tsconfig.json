@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "frontend-backend": ["../node_modules/@nikola_jacques/shared-types/index.d.ts"]
+    },
     "target": "es5",
     "lib": [
       "dom",
