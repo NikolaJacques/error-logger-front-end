@@ -10,11 +10,16 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 type LogType = AtomicViewType | SessionViewType | ErrorViewType;
 
+interface ErrorResponseType {message: string};
+    
+interface SuccessResponseType extends ErrorResponseType {logs: LogType[], total:number};
+
 interface State {
     view: ViewType;
     page: number;
     limit: number;
     data: LogType[];
+    total: number;
     changeState: (newState: State) => void;
 }
 
@@ -31,9 +36,9 @@ export default function Main() {
             try {
                 const urlString = `http://localhost:8080/logs/635d4399854b53aa6a6a4f0a?view=${view}&limit=${limit}&page=${page}`;
                 const response = await fetch(urlString);
-                if (!response.ok){throw new Error('Failed to fetch log data')}
+                if (!response.ok){throw new Error((response as unknown as ErrorResponseType).message)}
                 const data = await response.json();
-                return data.logs as LogType[];
+                return data as SuccessResponseType;
             }
             catch(err){
                 throw err;
@@ -43,7 +48,7 @@ export default function Main() {
         setLoading(true);
     
         fetchData()
-            .then(logs => setStateContext({...newState, data:(logs as any), changeState}))
+            .then(data => setStateContext({...newState, data:(data as any).logs, total: data.logs.length, changeState}))
             .then(() => setLoading(false))
             .catch(() => setError(true));
     }
@@ -53,6 +58,7 @@ export default function Main() {
         page: 1,
         limit: 10,
         data: [],
+        total: 0,
         changeState
     });
 

@@ -6,9 +6,7 @@ import {StateContext} from './Main';
 export default function PageNav() {
 
   const stateContext = useContext(StateContext);
-  const {page, changeState} = stateContext;
-
-  const totalPages = 1;
+  const {page, changeState, total, limit} = stateContext;
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     changeState({...stateContext, page:value});
@@ -16,7 +14,7 @@ export default function PageNav() {
 
   return (
     <Stack spacing={2}>
-      <Pagination count={totalPages} page={page} onChange={handleChange} />
+      <Pagination count={Math.ceil(total/limit)} page={page} onChange={handleChange} />
     </Stack>
   );
 }
