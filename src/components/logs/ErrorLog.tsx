@@ -32,22 +32,24 @@ export default function ErrorLog(props:Props) {
             aria-controls={`log${props.index}-content`}
             id={`log${props.index}bh-header`}
             >
-                <Typography sx={{ width: '66%', flexGrow: 1 }}>{props.log.name + ': ' + props.log.message}</Typography>
-                <Box sx={{ display:"flex", flexDirection:"column", width: '33%', color: 'text.secondary', flexShrink:0 }}>
-                    <Typography>total errors: {props.log.totalErrors}</Typography>
-                    <Typography>total sessions: {props.log.totalSessions}</Typography>
+                <Box sx={{width: "100%", display: {xs: "block", md:"flex"}, flexDirection:{sm: "column", md:"row"}}}>
+                    <Typography sx={{ width: {xs: "100%", md:'66%'}, flexGrow: 1 }}>{props.log.name + ': ' + props.log.message}</Typography>
+                    <Box sx={{display: {xs: "block", md:"flex"}, flexDirection:"column", width: {xs: "100%", md:'33%'}, color: 'text.secondary', flexShrink:0 }}>
+                        <Typography>total errors: {props.log.totalErrors}</Typography>
+                        <Typography>total sessions: {props.log.totalSessions}</Typography>
+                    </Box>
                 </Box>
             </AccordionSummary>
             <Divider></Divider>
             <AccordionDetails>
                 <Box sx={{display:{md:'flex'}, gap:"0.5rem", py: "1rem"}}>
-                    <Typography sx={{width:"25%"}}>stack:</Typography>
-                    <Typography sx={{width:"75%"}}>{props.log.stack}</Typography>
+                    <Typography sx={{width:{md:"25%"}}}>stack:</Typography>
+                    <Typography sx={{width:{md:"75%"}, wordBreak: {xs:"break-all", sm:"break-word"}}}>{props.log.stack}</Typography>
                 </Box>
                 {props.log.browserVersion.length===1?
                 <Box sx={{display:{md:'flex'}, gap:"0.5rem", py: "1rem"}}>
-                    <Typography sx={{width:"25%"}}>browser version:</Typography>
-                    <Typography sx={{width:"75%"}}>{props.log.browserVersion[0]}</Typography>
+                    <Typography sx={{width: {xs: "100%", md:'25%'}}}>browser version:</Typography>
+                    <Typography sx={{width: {xs: "100%", md:'75%'}}}>{props.log.browserVersion[0]}</Typography>
                 </Box>:
                 <Accordion sx={{width: '100%'}} expanded={browserExpanded === `${props.index}`} onChange={handleChange(`${props.index}`)}>
                     <AccordionSummary

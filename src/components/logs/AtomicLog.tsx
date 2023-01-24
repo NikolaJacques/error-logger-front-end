@@ -30,8 +30,8 @@ export default function AtomicLog(props:Props) {
             <Divider></Divider>
             <AccordionDetails>
                 <Box sx={{display:{md:'flex'}, gap:"0.5rem", py:"1rem"}}>
-                    <Typography sx={{width:"50%"}}>browser: {props.log.browserVersion}</Typography>
-                    <Typography sx={{width:"50%"}}>session: {props.log.sessionId}</Typography>
+                    <Typography sx={{width:{xs: "100%", md: "50%"}}}>browser: {props.log.browserVersion}</Typography>
+                    <Typography sx={{width:{xs: "100%", md: "50%"}}}>session: {props.log.sessionId}</Typography>
                 </Box>
                 <Accordion>
                     <AccordionSummary
@@ -42,7 +42,7 @@ export default function AtomicLog(props:Props) {
                         <Typography>stack trace:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>{props.log.stack}</Typography>    
+                        <Typography sx={{wordBreak: {xs:"break-all", sm:"break-word"}}}>{props.log.stack}</Typography>    
                     </AccordionDetails>
                 </Accordion>
                 <Accordion>

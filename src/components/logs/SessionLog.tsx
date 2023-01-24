@@ -31,11 +31,13 @@ export default function SessionLog(props:Props) {
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls={`log${props.index}-content`}
                 id={`log${props.index}bh-header`}
-                sx={{display:'flex', textAlign: "center"}}
+                sx={{display:'flex', textAlign: {xs:"left",md:"center"}, wordBreak: {xs:"break-all", sm:"break-word"}}}
             >
-                <Typography sx={{ width: '33%' }}>session: {props.log.sessionId}</Typography>
-                <Typography sx={{ width: '33%'  }}>{props.log.timestamp}</Typography>
-                <Typography sx={{ width: '33%'  }}>total errors: {props.log.totalErrors}</Typography>
+                <Box sx={{}}>
+                    <Typography sx={{width: {xs: "100%", md:'33%'}}}>session: {props.log.sessionId}</Typography>
+                    <Typography sx={{width: {xs: "100%", md:'33%'}}}>{props.log.timestamp}</Typography>
+                    <Typography sx={{width: {xs: "100%", md:'33%'}}}>total errors: {props.log.totalErrors}</Typography>
+                </Box>
             </AccordionSummary>
             <Divider></Divider>
             <AccordionDetails>
