@@ -1,18 +1,18 @@
 import React from 'react';
 import { useState, createContext, useEffect } from 'react';
 import { ViewType, AtomicViewType, SessionViewType, ErrorViewType } from 'frontend-backend';
-import ViewSelector from './ViewSelector';
+import { ErrorResponseType } from 'delivery-backend';
+import ViewSelector from '../components/ViewSelector';
 import Typography from '@mui/material/Typography';
-import LogDisplay from './LogDisplay';
-import ErrorHandler from './ErrorHandler';
+import LogDisplay from '../components/LogDisplay';
+import ErrorHandler from '../components/ErrorHandler';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import DateSelector from './DateSelector';
+import DateSelector from '../components/DateSelector';
 import dayjs, { Dayjs } from 'dayjs';
+import {useNavigate} from 'react-router-dom';
 
 type LogType = AtomicViewType | SessionViewType | ErrorViewType;
-
-interface ErrorResponseType {message: string};
     
 interface SuccessResponseType extends ErrorResponseType {logs: LogType[], total:number};
 
@@ -34,27 +34,45 @@ export default function Main() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
+    const navigate = useNavigate();
+
     const changeState = (newState: State) => {
         const {view, page, limit, startDate, endDate} = newState;
         const fetchData = async () => {
             try {
                 const urlString = `http://localhost:8080/logs/635d4399854b53aa6a6a4f0a?view=${view}&limit=${limit}&page=${page}&startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`;
-                const response = await fetch(encodeURI(urlString));
-                if (!response.ok){throw new Error((response as unknown as ErrorResponseType).message)}
+                const response = await fetch(encodeURI(urlString), {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 const data = await response.json();
+                if (!response.ok){
+                    const error = new Error() as ErrorResponseType;
+                    error.statusCode = data.status;
+                    error.message = data.message;
+                    throw error;
+                }
                 return data as SuccessResponseType;
             }
             catch(err){
                 throw err;
             }
         }
+
+        const token = sessionStorage.getItem('token');
+        if (!token){return navigate('/login')};
     
         setLoading(true);
     
         fetchData()
             .then(data => setStateContext({...newState, data:(data as any).logs, total: data.total, changeState}))
             .then(() => setLoading(false))
-            .catch(() => setError(true));
+            .catch((error) => {
+                setError(true);
+                if (error.statusCode===403){return navigate('/login')};
+            });
     }
 
     const [stateContext, setStateContext] = useState({

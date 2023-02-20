@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import {StateContext} from './Main';
+import {StateContext} from '../routes/Main';
 
 export default function PageNav() {
 

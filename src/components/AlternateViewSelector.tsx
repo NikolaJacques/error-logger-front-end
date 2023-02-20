@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useContext } from 'react';
 import { ViewType } from 'frontend-backend';
-import {StateContext} from './Main';
+import {StateContext} from '../routes/Main';
 
 const views: ViewType[] = ['atomic', 'session', 'error'];
 

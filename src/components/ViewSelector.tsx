@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ViewType } from 'frontend-backend';
-import {StateContext} from './Main';
+import {StateContext} from '../routes/Main';
 
 const views: ViewType[] = ['atomic', 'session', 'error'];
 

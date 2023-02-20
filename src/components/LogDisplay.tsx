@@ -4,7 +4,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Log from './Log';
 import PageNav from './PageNav';
-import {StateContext} from './Main';
+import {StateContext} from '../routes/Main';
 
 export default function LogDisplay() {
     
