@@ -40,18 +40,18 @@ export default function Main() {
         const {view, page, limit, startDate, endDate} = newState;
         const fetchData = async () => {
             try {
-                const urlString = `http://localhost:8080/logs/635d4399854b53aa6a6a4f0a?view=${view}&limit=${limit}&page=${page}&startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`;
+                const urlString = `http://localhost:8080/logs/635d4399854b53aa6a6a4f0a?view=${view}&limit=${limit}&page=${page}&startDate=${startDate.toISOString().split('Z')[0]}&endDate=${endDate.toISOString().split('Z')[0]}`;
                 const response = await fetch(encodeURI(urlString), {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                const status = response.status;
                 const data = await response.json();
                 if (!response.ok){
                     const error = new Error() as ErrorResponseType;
-                    error.statusCode = data.status;
-                    error.message = data.message;
+                    error.message = status + ' ' + data.message;
                     throw error;
                 }
                 return data as SuccessResponseType;
@@ -71,7 +71,8 @@ export default function Main() {
             .then(() => setLoading(false))
             .catch((error) => {
                 setError(true);
-                if (error.statusCode===403){return navigate('/login')};
+                const statusCode = parseInt(error.message.split(' ')[0]);
+                if (statusCode===401){return navigate('/login')};
             });
     }
 
