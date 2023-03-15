@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ViewType } from 'frontend-backend';
 import {StateContext} from '../routes/Main';
+import './ViewSelector.scss';
 
 const views: ViewType[] = ['atomic', 'session', 'error'];
 
@@ -23,7 +24,7 @@ export default function ViewSelector() {
   };
   
     return (
-      <Box sx={{ minWidth: 120 }}>
+      <Box className="view-selector-container">
         <FormControl fullWidth>
           <InputLabel id="view-select-label">View</InputLabel>
           <Select

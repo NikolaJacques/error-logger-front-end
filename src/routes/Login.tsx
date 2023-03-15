@@ -5,27 +5,10 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import {useNavigate} from 'react-router-dom';
 import { AdminAuthRequest } from 'frontend-backend';
-
-const useStyles = {
-  form: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    alignItems: 'center',
-    margin: 'auto',
-    marginTop: '1rem',
-    marginBottom: '1rem',
-    width: 'fit-content',
-  },
-  input: {
-    marginTop: '0.5rem',
-    marginBottom: '0.5rem',
-  },
-  button: {
-    marginTop: '1rem',
-  },
-};
+import './Login.scss';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -63,7 +46,6 @@ const LoginForm = () => {
         setError(false);
         const data = await response.text();
         const parsedData = JSON.parse(data);
-        console.log(parsedData.token);
         sessionStorage.setItem('token', parsedData.token);
         return navigate('/');
       } else {
@@ -80,33 +62,33 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={useStyles.form}>
-      <FormControl>
-        <FormLabel htmlFor="username">Username</FormLabel>
-        <Input
-          id="username"
-          type="text"
-          value={username}
-          onChange={handleUsernameChange}
-          style={useStyles.input}
-        />
-      </FormControl>
-      <FormControl>
-        <FormLabel htmlFor="password">Password</FormLabel>
-        <Input
-          id="password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-          style={useStyles.input}
-        />
-        <FormHelperText>
-          Password must be at least 8 characters long.
-        </FormHelperText>
-      </FormControl>
-      <Button variant="contained" type="submit" style={useStyles.button}>
-        Login
-      </Button>
+    <form onSubmit={handleSubmit}>
+      <Box className='flex-wrapper'>
+        <FormControl className='form-control'>
+          <FormLabel htmlFor="username">Username</FormLabel>
+          <Input
+            id="username"
+            type="text"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </FormControl>
+        <FormControl className='form-control'>
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <Input
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <FormHelperText>
+            Password must be at least 8 characters long.
+          </FormHelperText>
+        </FormControl>
+        <Button variant="contained" type="submit">
+          Login
+        </Button>
+      </Box>
       {error ? <FormHelperText error>Incorrect username or password</FormHelperText> : loading ? <CircularProgress /> : null}
     </form>
   );

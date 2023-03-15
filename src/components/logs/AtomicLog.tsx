@@ -8,6 +8,7 @@ import Divider from '@mui/material/Divider';
 import Box from '@mui/system/Box';
 import { AtomicViewType } from 'frontend-backend';
 import Actions from 'components/Actions';
+import './AtomicLog.scss';
 
 interface Props {
     changeHandler: Function;
@@ -18,20 +19,20 @@ interface Props {
 
 export default function AtomicLog(props:Props) {
     return (
-        <Accordion sx={{width: '100%'}} expanded={props.expanded === `${props.index}`} onChange={props.changeHandler(`${props.index}`)}>
+        <Accordion className='accordion-container' expanded={props.expanded === `${props.index}`} onChange={props.changeHandler(`${props.index}`)}>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`log${props.index}-content`}
             id={`log${props.index}bh-header`}
             >
-                <Typography sx={{ width: '66%', flexGrow: 1 }}>{props.log.name + ': ' + props.log.message}</Typography>
-                <Typography sx={{ color: 'text.secondary', flexShrink:0 }}>{props.log.timestamp}</Typography>
+                <Typography className='field-name'>{props.log.name + ': ' + props.log.message}</Typography>
+                <Typography className='field-timestamp'>{props.log.timestamp}</Typography>
             </AccordionSummary>
             <Divider></Divider>
             <AccordionDetails>
-                <Box sx={{display:{md:'flex'}, gap:"0.5rem", py:"1rem"}}>
-                    <Typography sx={{width:{xs: "100%", md: "50%"}}}>browser: {props.log.browserVersion}</Typography>
-                    <Typography sx={{width:{xs: "100%", md: "50%"}}}>session: {props.log.sessionId}</Typography>
+                <Box className='accordion-details-wrapper'>
+                    <Typography className='accordion-details'>browser: {props.log.browserVersion}</Typography>
+                    <Typography className='accordion-details'>session: {props.log.sessionId}</Typography>
                 </Box>
                 <Accordion>
                     <AccordionSummary
@@ -42,7 +43,7 @@ export default function AtomicLog(props:Props) {
                         <Typography>stack trace:</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography sx={{wordBreak: {xs:"break-all", sm:"break-word"}}}>{props.log.stack}</Typography>    
+                        <Typography className='action-details'>{props.log.stack}</Typography>    
                     </AccordionDetails>
                 </Accordion>
                 <Accordion>

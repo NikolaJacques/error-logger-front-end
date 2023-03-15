@@ -1,0 +1,27 @@
+@use './utils/common' as *;
+
+$widthPercentages : (
+    'xs':100%,
+    'sm':85%,
+    'md':66%,
+    'lg':50%
+);
+
+$offset: 4rem;
+
+.MuiContainer-root.container {
+    height: 100vh-$offset;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @each $key, $value in $widthPercentages {
+        @include breakpoint($key){
+            max-width: $value;
+        }    
+    }
+}
+
+.layout-wrapper {
+    margin-top: 2*$offset;
+}

@@ -1,0 +1,48 @@
+@use 'src/utils/common' as *;
+
+@mixin width-xs-100 {
+    @include breakpoint('xs'){
+        width:100%;
+    }
+}
+
+.accordion-container {
+    width:100%;
+}
+
+.accordion-summary-wrapper {
+    display:flex;
+    @include breakpoint('xs'){
+        text-align: left;
+        word-break: break-all;
+    }
+    @include breakpoint('sm'){
+        flex-direction: column;
+        word-break: break-word;
+    }
+    @include breakpoint('md'){
+        text-align: center;
+    }
+}
+
+.field {
+    @include width-xs-100();
+    @include breakpoint('md'){
+        width:33%;
+    }
+}
+
+.accordion-details {
+    gap:0.5rem;
+    @include breakpoint('md'){
+        display:flex;
+    }
+}
+
+.accordion-details-error-label {
+    width:25%;
+}
+
+.accordion-details-errors-wrapper {
+    width:75%;
+}

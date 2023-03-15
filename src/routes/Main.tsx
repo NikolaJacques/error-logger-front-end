@@ -11,6 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import DateSelector from '../components/DateSelector';
 import dayjs, { Dayjs } from 'dayjs';
 import {useNavigate} from 'react-router-dom';
+import './Main.scss';
 
 type LogType = AtomicViewType | SessionViewType | ErrorViewType;
     
@@ -37,7 +38,12 @@ export default function Main() {
     const navigate = useNavigate();
 
     const changeState = (newState: State) => {
+
         const {view, page, limit, startDate, endDate} = newState;
+
+        const token = sessionStorage.getItem('token');
+        if (!token){return navigate('/login')};
+
         const fetchData = async () => {
             try {
                 const urlString = `http://localhost:8080/logs/635d4399854b53aa6a6a4f0a?view=${view}&limit=${limit}&page=${page}&startDate=${startDate.toISOString().split('Z')[0]}&endDate=${endDate.toISOString().split('Z')[0]}`;
@@ -60,9 +66,6 @@ export default function Main() {
                 throw err;
             }
         }
-
-        const token = sessionStorage.getItem('token');
-        if (!token){return navigate('/login')};
     
         setLoading(true);
     
@@ -72,6 +75,7 @@ export default function Main() {
             .catch((error) => {
                 setError(true);
                 const statusCode = parseInt(error.message.split(' ')[0]);
+                console.log(error.message, statusCode);
                 if (statusCode===401){return navigate('/login')};
             });
     }
@@ -94,20 +98,22 @@ export default function Main() {
     return (
         <ErrorHandler>
             <StateContext.Provider value={stateContext}>
-            <Box sx={{display:'flex', justifyContent:"space-between"}}>
-                <Typography variant="h5" component="p" align="left" sx={{py: '1rem'}}>Project Title</Typography>
-                <DateSelector/>
+            <Box className='title-container'>
+                <Typography className='title' variant="h5" component="p" align="left">Project Title</Typography>
+                <Box className='selectors'>
+                    <DateSelector/>
+                    <ViewSelector/>
+                </Box>
             </Box>
-                <ViewSelector/>
-                {error ? <Typography component="p">An error occured: Data couldn't be fetched.</Typography> : 
-                    loading ? 
-                    <Box sx={{display: 'flex'}}>
+            {error ? <Typography component="p">An error occured: Data couldn't be fetched.</Typography> :
+                    loading ?
+                    <Box className='loader'>
                         <Typography>Loading Data</Typography>
                         <CircularProgress />
                     </Box> :
                     <LogDisplay/>
-                }    
-            </StateContext.Provider>
+            }
+        </StateContext.Provider>
         </ErrorHandler>
     )
 }

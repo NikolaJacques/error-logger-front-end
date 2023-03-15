@@ -1,0 +1,40 @@
+@use 'src/utils/common' as *;
+
+.accordion-container {
+    width:100%;
+}
+
+.field-name {
+    width: 66%;
+    flex-grow: 1;
+}
+
+.field-timestamp {
+    flex-shrink: 0;
+}
+
+.accordion-details-wrapper {
+    padding: 1rem 0rem;
+    gap: 0.5rem;
+    @include breakpoint('md'){
+        display: flex;
+    }
+}
+
+.accordion-details {
+    @include breakpoint('xs'){
+        width:100%; 
+    }
+    @include breakpoint('md'){
+        width:33%; 
+    }
+}
+
+.action-details {
+    @include breakpoint('xs'){
+        word-break: break-all; 
+    }
+    @include breakpoint('md'){
+        word-break: break-word; 
+    }
+}

@@ -1,0 +1,28 @@
+@use '../utils/common' as *;
+
+.action-item-container {
+    width: 100%;
+    display: flex;
+}
+
+.action-item-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    @include breakpoint('xs'){
+        flex-direction: column;
+    }
+    @include breakpoint('sm'){
+        flex-direction: row;
+    }
+}
+
+.action-item-wrapper-level-2 {
+    display:flex;
+}
+
+.target {
+    display:flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}

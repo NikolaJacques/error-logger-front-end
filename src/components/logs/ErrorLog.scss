@@ -1,0 +1,93 @@
+@use 'src/utils/common' as *;
+
+@mixin width-xs-100 {
+    @include breakpoint('xs'){
+        width:100%;
+    }
+}
+
+.accordion-container {
+    width:100%;
+}
+
+.accordion-summary-wrapper {
+    width:100%;
+    @include breakpoint('xs'){
+        display:block;
+    }
+    @include breakpoint('sm'){
+        flex-direction: column;
+    }
+    @include breakpoint('md'){
+        display:flex;
+        flex-direction: row;
+    }
+}
+
+.field-name {
+    flex-grow: 1;
+    @include width-xs-100();
+    @include breakpoint('md'){
+        width:66%;
+    }
+}
+
+.totals-fields-wrapper {
+    flex-direction: column;
+    flex-shrink: 0;
+    @include breakpoint('xs'){
+        width:100%;
+        display:block;
+    }
+    @include breakpoint('md'){
+        width:33%;
+        display:flex;
+    }
+}
+
+.accordion-details-wrapper {
+    padding: 1rem 0rem;
+    gap: 0.5rem;
+    @include breakpoint('md'){
+        display: flex;
+    }
+}
+
+.field-stack-label {
+    @include breakpoint('md'){
+        width:25%;
+    }
+}
+
+.field-stack-content {
+    @include breakpoint('xs'){
+        word-break: break-all;
+    }
+    @include breakpoint('sm'){
+        word-break: break-word;
+    }
+    @include breakpoint('md'){
+        width:75%;
+    }
+}
+
+.accordion-details {
+    @include width-xs-100();
+    @include breakpoint('md'){
+        width:33%; 
+    }
+}
+
+.accordion-details-browser-label {
+    @include width-xs-100();
+    @include breakpoint('md'){
+        width:25%; 
+    }
+}
+
+.accordion-details-browser-content {
+    @include width-xs-100();
+    @include breakpoint('md'){
+        width:75%; 
+    }
+}

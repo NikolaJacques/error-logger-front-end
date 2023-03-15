@@ -1,0 +1,31 @@
+@use '../utils/common' as *;
+
+.MuiButtonBase-root.MuiIconButton-root.menu {
+    order: 1;
+    margin-right: 2rem;
+    @include breakpoint('sm'){
+        display: none;
+    }
+}
+
+.toolbar {
+    color: #fff;
+    text-align: center;
+}
+
+.toolbar-title {
+    order:1;
+    flex-grow: 1;
+    @include breakpoint('sm'){
+        flex-grow: 0;
+    }
+}
+
+.nav-items {
+    margin-left: auto;
+    display: none;
+    @include breakpoint('sm'){
+        display:block;
+        order:2;
+    }
+}

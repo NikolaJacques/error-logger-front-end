@@ -8,6 +8,7 @@ import Divider from '@mui/material/Divider';
 import Box from '@mui/system/Box';
 import { SessionViewType, AtomicViewType } from 'frontend-backend';
 import AtomicLog from './AtomicLog';
+import './SessionLog.scss';
 
 interface Props {
     changeHandler: Function;
@@ -26,24 +27,24 @@ export default function SessionLog(props:Props) {
           };
 
     return (
-        <Accordion sx={{width: '100%'}} expanded={props.expanded === `${props.index}`} onChange={props.changeHandler(`${props.index}`)}>
+        <Accordion className='accordion-container' expanded={props.expanded === `${props.index}`} onChange={props.changeHandler(`${props.index}`)}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls={`log${props.index}-content`}
                 id={`log${props.index}bh-header`}
-                sx={{display:'flex', textAlign: {xs:"left",md:"center"}, wordBreak: {xs:"break-all", sm:"break-word"}}}
+                className="accordion-summary-wrapper"
             >
-                <Box sx={{}}>
-                    <Typography sx={{width: {xs: "100%", md:'33%'}}}>session: {props.log.sessionId}</Typography>
-                    <Typography sx={{width: {xs: "100%", md:'33%'}}}>{props.log.timestamp}</Typography>
-                    <Typography sx={{width: {xs: "100%", md:'33%'}}}>total errors: {props.log.totalErrors}</Typography>
-                </Box>
+            <Box>
+                <Typography className="field">session: {props.log.sessionId}</Typography>
+                <Typography className="field">{props.log.timestamp}</Typography>
+                <Typography className="field">total errors: {props.log.totalErrors}</Typography>
+            </Box>
             </AccordionSummary>
             <Divider></Divider>
             <AccordionDetails>
-                <Box sx={{display:{md:'flex'}, gap:"0.5rem"}}>
-                    <Typography sx={{width:"25%"}}>errors:</Typography>
-                    <Box sx={{width:"75%"}}>
+                <Box className="accordion-details">
+                    <Typography className="accordion-details-error-label">errors:</Typography>
+                    <Box className="accordion-details-errors-wrapper">
                         {props.log.errors.map((error: AtomicViewType, index: number) => {
                             return <AtomicLog log={error} index={index} key={index} expanded={errorExpanded} changeHandler={handleChange}/>
                         })}

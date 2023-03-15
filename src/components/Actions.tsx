@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
 import {Action} from 'frontend-backend';
+import './Actions.scss';
 
 interface Props {
     actions: Action[]
@@ -14,11 +15,11 @@ export default function Actions(props: Props) {
         <List>
             {props.actions?props.actions.map((action, index) => {
                 return (
-                    <ListItem key={index} sx={{width: "100%", display: 'flex'}}>
-                        <Box sx={{display: 'flex', flexDirection: {xs: 'column', sm:'row'}, justifyContent:"space-around", width:"100%"}}>
-                            <Box sx={{display: 'flex', flexDirection: 'row'}}>
+                    <ListItem key={index} className="action-item-container">
+                        <Box className="action-item-wrapper">
+                            <Box className="action-item-wrapper-level-2">
                                 <Typography>target:</Typography>
-                                <Box sx={{display: 'flex', flexDirection: 'column', marginLeft: '1rem'}}>
+                                <Box className="target">
                                     <Typography>element: {action.target.localName}</Typography>
                                     <Typography>id: {action.target.id}</Typography>
                                     <Typography>class: {action.target.className}</Typography>
