@@ -3,11 +3,11 @@ import List from '@mui/material/List';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
-import {Action} from 'frontend-backend';
+import { ActionType } from 'intersection';
 import './Actions.scss';
 
 interface Props {
-    actions: Action[]
+    actions: ActionType[]
 }
 
 export default function Actions(props: Props) {

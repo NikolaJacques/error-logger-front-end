@@ -7,7 +7,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { StateContext } from '../routes/Main';
 
-
 export default function DateSelector() {
 
   const stateContext = useContext(StateContext);

@@ -6,7 +6,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/system/Box';
-import { SessionViewType, AtomicViewType } from 'frontend-backend';
+import { SessionViewType } from 'frontend-backend';
+import { ExtendedErrorLogType } from 'intersection';
 import AtomicLog from './AtomicLog';
 import './SessionLog.scss';
 
@@ -45,7 +46,7 @@ export default function SessionLog(props:Props) {
                 <Box className="accordion-details">
                     <Typography className="accordion-details-error-label">errors:</Typography>
                     <Box className="accordion-details-errors-wrapper">
-                        {props.log.errors.map((error: AtomicViewType, index: number) => {
+                        {props.log.errors.map((error: ExtendedErrorLogType<string>, index: number) => {
                             return <AtomicLog log={error} index={index} key={index} expanded={errorExpanded} changeHandler={handleChange}/>
                         })}
                     </Box>

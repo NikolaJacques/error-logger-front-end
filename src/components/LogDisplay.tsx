@@ -1,10 +1,13 @@
 import { useContext } from 'react';
-import { AtomicViewType, ErrorViewType, SessionViewType } from 'frontend-backend';
+import { ExtendedErrorLogType } from 'intersection';
+import { ErrorViewType, SessionViewType } from 'frontend-backend';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Log from './Log';
 import PageNav from './PageNav';
 import {StateContext} from '../routes/Main';
+
+type AtomicViewType = ExtendedErrorLogType<string>;
 
 export default function LogDisplay() {
     

@@ -1,9 +1,12 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
-import { SessionViewType, ErrorViewType, ViewType, AtomicViewType } from 'frontend-backend';
+import { ExtendedErrorLogType } from 'intersection';
+import { SessionViewType, ErrorViewType, ViewType } from 'frontend-backend';
 import AtomicLog from './logs/AtomicLog';
 import ErrorLog from './logs/ErrorLog';
 import SessionLog from './logs/SessionLog';
+
+type AtomicViewType = ExtendedErrorLogType<string>;
 
 interface Props {
     view: ViewType;

@@ -1,6 +1,7 @@
 import React from 'react';
+import { ExtendedErrorLogType } from 'intersection';
 import { useState, createContext, useEffect } from 'react';
-import { ViewType, AtomicViewType, SessionViewType, ErrorViewType } from 'frontend-backend';
+import { ViewType, SessionViewType, ErrorViewType } from 'frontend-backend';
 import { ErrorResponseType } from 'delivery-backend';
 import ViewSelector from '../components/ViewSelector';
 import Typography from '@mui/material/Typography';
@@ -13,6 +14,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import {useNavigate} from 'react-router-dom';
 import './Main.scss';
 
+type AtomicViewType = ExtendedErrorLogType<string>;
 type LogType = AtomicViewType | SessionViewType | ErrorViewType;
     
 interface SuccessResponseType extends ErrorResponseType {logs: LogType[], total:number};
