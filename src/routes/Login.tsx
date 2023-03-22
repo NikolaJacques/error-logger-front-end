@@ -50,7 +50,7 @@ const LoginForm = () => {
         return navigate('/');
       } else {
         setError(true);
-        throw new Error((response as unknown as {message:string}).message);
+        throw new Error(`Status ${response.status}: failed to authenticate`);
       }
     }
     catch(err){
