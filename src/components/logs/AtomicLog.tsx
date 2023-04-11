@@ -6,9 +6,11 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/system/Box';
-import { AtomicViewType } from 'frontend-backend';
+import { ExtendedErrorLogType } from 'intersection';
 import Actions from 'components/Actions';
 import './AtomicLog.scss';
+
+type AtomicViewType = ExtendedErrorLogType<string>; 
 
 interface Props {
     changeHandler: Function;
